@@ -1,0 +1,9 @@
+
+byte turn = 1
+
+proctype P(){
+    do
+
+    
+    od
+}

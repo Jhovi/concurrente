@@ -1,0 +1,35 @@
+# 1 "cenafilosofos.pml"
+# 1 "<interno>"
+# 1 "<línea-de-orden>"
+# 1 "cenafilosofos.pml"
+
+
+
+
+
+byte fork[5]= {1,1,1,1,1}
+
+active[5 -1] proctype P1(){
+    do
+    ::
+        printf("Pensando\n")
+        atomic {fork[_pid]>0 -> fork[_pid]--}
+        atomic {fork[_pid+1]>0 -> fork[_pid+1]--}
+        printf("Comiendo\n")
+        fork[_pid]++
+        fork[_pid+1]++
+    od
+}
+
+active proctype p2(){
+    do
+    ::
+        printf("L Pensando\n")
+        atomic {fork[0]>0 -> fork[0]--}
+        atomic {fork[5 -1]>0 -> fork[5 -1]--}
+        printf("L Comiendo\n")
+        fork[0]++
+        fork[5 -1]++
+
+    od
+}
